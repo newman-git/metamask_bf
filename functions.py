@@ -1,4 +1,6 @@
 import subprocess
+import time
+
 
 #return your seed_words
 def seed_words():
@@ -6,7 +8,8 @@ def seed_words():
   
 #copy to clipboard
 def copy2clip(txt):
-    cmd='echo '+txt.strip()+'|clip'
+    time.sleep(0.1)
+    cmd='echo '+txt.strip()+' | clip'
     return subprocess.check_call(cmd, shell=True)
 #get next permutation
 def nextPermutation( arr):

@@ -6,31 +6,31 @@ import time
 import functions as mf #this file 'functions.py' is in the same folder. it is required for this program to run
 #!!!
 
-EXTENSION_PATH = "" #enter the path to your .crx file here
-mm_extension_id = "" #enter your metamask extension id here
+EXTENSION_PATH = "C:\\Users\\Newman\\Desktop\\MetaMask.crx" #enter the path to your .crx file here
+mm_extension_id = "nkbihfbeogaeaoehlefnkodbefgpgknn" #enter your metamask extension id here
 opt = webdriver.ChromeOptions()
 opt.add_extension(EXTENSION_PATH)
-driver = webdriver.Chrome(options=opt)
+driver = webdriver.Chrome(executable_path="C:\\Users\\Newman\\Desktop\\chromedriver.exe", options=opt)
 
 driver.switch_to.window(driver.window_handles[1]) #switch to first window
 driver.get('chrome-extension://'+mm_extension_id+'/home.html#initialize/create-password/import-with-seed-phrase') #go to seed phrase page
-time.sleep(1)
+time.sleep(1.5)
 driver.find_element(by = By.XPATH, value= '//*[@id="import-srp__srp-word-0"]') #select textbox
 
 
 #ENTER SEED WORDS, current COUNT:
-seed_words = ['scene',
-'scheme',
-'school',
-'science',
-'scissors',
-'produce',
-'profit',
-'program',
-'project',
-'script',
-'scrub',
-'sea']
+seed_words = ['meadow',
+'wild',
+'kiss',
+'disorder',
+'exhaust',
+'forget',
+'resource',
+'until',
+'away',
+'ignore',
+'fall',
+'make']
 password = '12345678'
 count = 1 #starts at 1, input 'n' to start at 'n'th permutation
 #EDITABLE ^^^
@@ -44,7 +44,7 @@ arr = [1,2,3,4,5,6,7,8,9,10,11,12]
 arr = mf.getPermutation(len(arr), count)
 
 #print starting string and starting array:
-print("START:",arr, [seed_words[i] for i in arr])
+print("START:", arr, [seed_words[i] for i in arr])
 
 #loop through permuations:
 t0 = time.time()
@@ -56,6 +56,7 @@ while looper:
         s += ' ' + seed_words[i]
     s.strip()
 
+    # тут падает Unable to locate element: {"method":"xpath","selector":"//*[@id="import-srp__srp-word-0"]"}
     mf.copy2clip(s) #copy string
     driver.find_element(by = By.XPATH, value = '//*[@id="import-srp__srp-word-0"]').send_keys(Keys.CONTROL + 'v') #paste string
 
@@ -85,7 +86,7 @@ while looper:
             driver.find_element(by = By.XPATH, value = '//*[@id="app-content"]/div/div[3]/div/div/div/form/button').click() #click restore
 
         #HERE we need to wait for the restore process to load!!
-        time.sleep(2)
+        time.sleep(6)
 
         try: #after first login, click all done disapears
             driver.find_element(by = By.CSS_SELECTOR, value = '#app-content > div > div.main-container-wrapper > div > div > button').click() #click all done
@@ -94,8 +95,8 @@ while looper:
 
         
         #once in wallet
-        elem = driver.find_element(by = By.XPATH, value = '/html/body/div[1]/div/div[3]/div/div/div/div[2]/div/div[1]/div/div/div/div[2]/span[1]') #find balance element
-        usd = float(elem.text[1:]) #get balance usd
+        elem = driver.find_element(by = By.XPATH, value = '/html/body/div[1]/div/div[3]/div/div/div/div[2]/div/div[1]/div/div/div/div[2]/span[2]') #find balance element
+        usd = float(elem.text[1:].replace('$','')) #get balance usd
         if usd == 0:
             arr = mf.nextPermutation(arr)
             looper = True
@@ -106,9 +107,9 @@ while looper:
                 driver.find_element(by = By.XPATH, value = '//*[@id="popover-content"]/div/div/section/div[1]/div/button').click() #exit pop-up
             except:
                 pass
-            driver.find_element(by = By.XPATH, value = '/html/body/div[1]/div/div[1]/div/div[2]/div[2]/div/div').click() #click on profile
+            driver.find_element(by = By.XPATH, value = '/html/body/div[1]/div/div[1]/div[1]/div[2]/button').click() #click on profile
             driver.find_element(by = By.XPATH, value = '//*[@id="app-content"]/div/div[3]/div[2]/button').click() #click 'lock' account
-            time.sleep(0.01)
+            time.sleep(0.1)
             driver.get('chrome-extension://'+mm_extension_id+'/home.html#restore-vault')
         else:
             looper = False

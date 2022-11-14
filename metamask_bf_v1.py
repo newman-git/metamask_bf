@@ -36,12 +36,12 @@ seed_words_test = {1:'abandon',
 12:'accident'}
 
 
-EXTENSION_PATH = "" #enter the path to the metamask .crx file here
+EXTENSION_PATH = "C:\\Users\\Newman\\Desktop\\MetaMask.crx" #enter the path to your .crx file here
 
 opt = webdriver.ChromeOptions()
 opt.add_extension(EXTENSION_PATH)
-driver = webdriver.Chrome(chrome_options=opt)
-time.sleep(1)
+driver = webdriver.Chrome(executable_path="C:\\Users\\Newman\\Desktop\\chromedriver.exe", options=opt)
+time.sleep(4)
 
 #switch tabs
 driver.switch_to.window(driver.window_handles[0])
@@ -49,14 +49,14 @@ driver.switch_to.window(driver.window_handles[0])
 
 #CLICK THROUGH BUTTONS:
 #btn1
-time.sleep(1)
+time.sleep(3)
 elem = driver.find_element(by = By.XPATH, value = '/html/body/div[1]/div/div[2]/div/div/div/button').click()
 #btn2
-time.sleep(1)
-elem = driver.find_element(by = By.XPATH, value = '/html/body/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div[1]/button').click()
+#time.sleep(3)
+#elem = driver.find_element(by = By.XPATH, value = '/html/body/div[1]/div/div[2]/div/div/div[4]/div/div[2]/div[1]/button').click()
 #btn3
-time.sleep(1)
-elem = driver.find_element(by = By.XPATH, value = '/html/body/div[1]/div/div[2]/div/div/div/div[5]/div[1]/footer/button[2]').click()
+time.sleep(3)
+#elem = driver.find_element(by = By.XPATH, value = '/html/body/div[1]/div/div[2]/div/div/div/div[5]/div[1]/footer/button[2]').click()
 
 
 #CREATE KEYWORD STRING
