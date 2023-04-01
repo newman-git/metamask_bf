@@ -19,6 +19,7 @@ driver.find_element(by = By.XPATH, value= '//*[@id="import-srp__srp-word-0"]') #
 
 
 #ENTER SEED WORDS, current COUNT:
+# meadow wild kiss disorder until resource fall make ignore forget away exhaust
 seed_words = ['meadow',
 'wild',
 'kiss',
@@ -32,7 +33,7 @@ seed_words = ['meadow',
 'fall',
 'make']
 password = '12345678'
-count = 1 #starts at 1, input 'n' to start at 'n'th permutation
+count = 69707 #starts at 1, input 'n' to start at 'n'th permutation
 #EDITABLE ^^^
 
 keys = [i for i in range(1,13)]

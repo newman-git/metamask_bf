@@ -8,7 +8,7 @@ def seed_words():
   
 #copy to clipboard
 def copy2clip(txt):
-    time.sleep(0.1)
+    time.sleep(0.2)
     cmd='echo '+txt.strip()+' | clip'
     return subprocess.check_call(cmd, shell=True)
 #get next permutation
